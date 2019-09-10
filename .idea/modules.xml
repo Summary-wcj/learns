@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/springboot-aop-log/springboot-aop-log.iml" filepath="$PROJECT_DIR$/springboot-aop-log/springboot-aop-log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-ehcache/springboot-ehcache.iml" filepath="$PROJECT_DIR$/springboot-ehcache/springboot-ehcache.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-elasticsearch/springboot-elasticsearch.iml" filepath="$PROJECT_DIR$/springboot-elasticsearch/springboot-elasticsearch.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot-global/springboot-global.iml" filepath="$PROJECT_DIR$/springboot-global/springboot-global.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-jwt-rsa/springboot-jwt-rsa.iml" filepath="$PROJECT_DIR$/springboot-jwt-rsa/springboot-jwt-rsa.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/springboot-learn.iml" filepath="$PROJECT_DIR$/.idea/springboot-learn.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot-mybatis/springboot-mybatis.iml" filepath="$PROJECT_DIR$/springboot-mybatis/springboot-mybatis.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot-redis/springboot-redis.iml" filepath="$PROJECT_DIR$/springboot-redis/springboot-redis.iml" />

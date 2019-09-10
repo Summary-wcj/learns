@@ -1,6 +1,7 @@
 package cn.tellsea.web;
 
 import cn.tellsea.annotation.SystemControllerLog;
+import cn.tellsea.annotation.SystemServiceLog;
 import cn.tellsea.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ public class TestController {
     }
 
     @GetMapping("service")
+    @SystemServiceLog(description="测试service的日志")
     public String service() {
         return userService.test();
     }

@@ -24,14 +24,13 @@ public class RedisServiceImpl implements RedisService {
     private RedisTemplate<String, String> redisTemplate;
 
     private RedisConnection execute() {
-        return (RedisConnection) redisTemplate.execute(new RedisCallback() {
-            @Override
-            public Object doInRedis(RedisConnection redisConnection) throws DataAccessException {
-                return redisConnection;
-            }
-        });
+        return (RedisConnection) redisTemplate.execute((RedisCallback) redisConnection -> redisConnection);
     }
-
+    /**
+     * 获取redis基础info 数据
+     * @return java.util.List<cn.tellsea.dto.RedisInfo>
+     * @create 2019/9/10 14:09
+     */
     @Override
     public List<RedisInfo> getRedisInfo() {
         try {
@@ -50,16 +49,30 @@ public class RedisServiceImpl implements RedisService {
         }
     }
 
+    /**
+     * 获取redis内存信息
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     * @create 2019/9/10 13:53
+     */
     @Override
     public Map<String, Object> getRedisMemory() {
         return getData("memory", execute().info("memory").get("used_memory"));
     }
-
+    /**
+     * 获取redis key的数量
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     * @create 2019/9/10 13:53
+     */
     @Override
     public Map<String, Object> getRedisDbSize() {
         return getData("dbsize", execute().dbSize());
     }
-
+    /**
+     * 通过正则表达式查询keys列表
+     * @param pattern
+     * @return java.util.Set<java.lang.String>
+     * @create 2019/9/10 13:54
+     */
     @Override
     public Set<String> getKeys(String pattern) {
         try {
@@ -69,7 +82,12 @@ public class RedisServiceImpl implements RedisService {
             return new HashSet<>();
         }
     }
-
+    /**
+     * 通过key获取value值
+     * @param key
+     * @return java.lang.String
+     * @create 2019/9/10 13:54
+     */
     @Override
     public String get(String key) {
         try {
@@ -84,37 +102,64 @@ public class RedisServiceImpl implements RedisService {
             return null;
         }
     }
-
+    /**
+     * 添加key-value键值对数据
+     * @param key
+     * @param value
+     * @return java.lang.Boolean
+     * @create 2019/9/10 13:55
+     */
     @Override
     public Boolean set(String key, String value) {
         return execute().set(key.getBytes(), value.getBytes());
     }
-
+    /**
+     * 删除key
+     * @param keys
+     * @return java.lang.Long
+     * @create 2019/9/10 14:06
+     */
     @Override
     public Long del(String... keys) {
         long result = 0;
-        for (int i = 0; i<keys.length;i++) {
+        for (int i = 0; i < keys.length; i++) {
             result += execute().del(keys[i].getBytes());
         }
         return result;
     }
-
+    /**
+     * 判断key是否存在
+     * @param keys
+     * @return java.lang.Long
+     * @create 2019/9/10 14:06
+     */
     @Override
     public Long exists(String... keys) {
         long result = 0;
-        for (int i =0; i<keys.length; i++) {
+        for (int i = 0; i < keys.length; i++) {
             if (execute().exists(keys[i].getBytes())) {
-                result ++;
+                result++;
             }
         }
         return result;
     }
-
+    /**
+     * 获取key剩余时间
+     * @param key
+     * @return java.lang.Long
+     * @create 2019/9/10 14:07
+     */
     @Override
     public Long pttl(String key) {
         return execute().pTtl(key.getBytes());
     }
-
+    /**
+     * 以毫秒为单位设置key的生成时间
+     * @param key
+     * @param time
+     * @return java.lang.Long
+     * @create 2019/9/10 14:07
+     */
     @Override
     public Long pexpire(String key, Long time) {
         if (execute().pExpire(key.getBytes(), time)) {

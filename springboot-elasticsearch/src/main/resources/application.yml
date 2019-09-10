@@ -1,5 +1,5 @@
 spring:
   data:
     elasticsearch:
-      cluster-name: elasticsearch
-      cluster-nodes: 127.0.0.1:9300
+      cluster-name: my-application
+      cluster-nodes: 192.168.3.20:9300
